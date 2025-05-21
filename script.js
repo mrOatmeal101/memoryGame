@@ -65,6 +65,13 @@ let clickedCards = {}
 
 const matchedPairs = {}
 
+let score = 0;
+let scoreCounter = document.createElement('h3')
+scoreCounter.textContent = `Your score is ${score}`
+const scoreBanner = document.querySelector("#score-display")
+scoreBanner.append(scoreCounter)
+
+
 // TODO: Implement this function!
 function handleCardClick(event) {
   
@@ -85,10 +92,13 @@ function handleCardClick(event) {
   // Goal is to be able to distinguish between cards that have flipped and have not flipped otherwise 
   // the color classes would match.  
   selectedCard.classList.add("flipped")
- 
+  
   // This increases the variable clickCount every time a user clicks on a div inside of the game div.
   clickCount++
- 
+  score++
+  scoreCounter.textContent = `Your score is ${score}`
+  // console.log(score)
+  
   // this is setting the object to have the keys set as the click and the value set to the DOMElement
   // i.e. the 1st click should be equal to the div.className and 2nd click equal to div.className 
   // setting this equal to the DOMElement allows you to control the direct element 
@@ -103,7 +113,7 @@ function handleCardClick(event) {
 // setting the var equal to the second key value pair stored in the obj 
   secondCard = clickedCards[2]
 
-  // console.log(clickCount)
+  console.log(clickCount)
   // console.log(clickedCards)
   // console.log(clickedCards[1])
   // console.log(clickedCards[2])
@@ -116,6 +126,7 @@ function handleCardClick(event) {
     // resetting the clickCount to zero otherwise it will stop due to first if statement.
     // this is so that you can cantinue playing after matching a card.
     clickCount = 0
+    
     // resetting the obj so that firstCard and secondCard can be occupied by new player choices. 
     clickedCards = {}
     console.log('success')
@@ -146,12 +157,18 @@ function handleCardClick(event) {
   if (Object.keys(matchedPairs).length === gameContainer.children.length/2) {
     // console.log('congratulations you matched all cards')
     // creating h2 and adding text to notify user of completed game. 
-    winBanner = document.createElement('h2')
-    winBanner.textContent = 'Congratulations you matched all the cards'
+    const winBanner = document.createElement('h2')
+    winBanner.textContent = `Congratulations you matched all the cards with a score of ${score}`
     // creating a const that has the div with the id of win-banner.
     const winner = document.querySelector('#win-banner')
     // adding message to the page so the user can see that the game is over. 
-    winner.append(winBanner)
+    const restartbutton = document.createElement('button')
+    restartbutton.textContent = 'Restart Game'
+    restartbutton.addEventListener('click', function(){
+      window.location.reload()
+    })
+
+    winner.append(winBanner, restartbutton)
 
   }
 
