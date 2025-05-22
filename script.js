@@ -63,9 +63,6 @@ function createDivsForColors(colorArray) {
   }
 }
 
-
-
-
 // var to store how many times the user has clicked 
 // goal is to reset after 2 clicks
 let clickCount = 0;
@@ -190,6 +187,7 @@ startbutton.addEventListener('click', function(){
 // when the DOM loads
 if (!gameOnOff){
   gameOnOff = true;
+  startbutton.remove();
 createDivsForColors(shuffledColors);
 }
 
