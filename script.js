@@ -38,6 +38,12 @@ function shuffle(array) {
 
 let shuffledColors = shuffle(COLORS);
 
+const startbutton = document.createElement('button')
+startbutton.textContent = 'Start'
+const startSession = document.querySelector('#start-game')
+startSession.append(startbutton)
+
+
 // this function loops over the array of colors
 // it creates a new div and gives it a class with the value of the color
 // it also adds an event listener for a click for each card
@@ -56,6 +62,9 @@ function createDivsForColors(colorArray) {
     gameContainer.append(newDiv);
   }
 }
+
+
+
 
 // var to store how many times the user has clicked 
 // goal is to reset after 2 clicks
@@ -165,6 +174,7 @@ function handleCardClick(event) {
     const restartbutton = document.createElement('button')
     restartbutton.textContent = 'Restart Game'
     restartbutton.addEventListener('click', function(){
+      gameOnOff = false;
       window.location.reload()
     })
 
@@ -174,7 +184,14 @@ function handleCardClick(event) {
 
 }
 
-// when the DOM loads
-createDivsForColors(shuffledColors);
+let gameOnOff = false;
 
+startbutton.addEventListener('click', function(){
+// when the DOM loads
+if (!gameOnOff){
+  gameOnOff = true;
+createDivsForColors(shuffledColors);
+}
+
+})
 /* */
